@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keanu Lee Naidoo - Web Developer Portfolio</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter for a clean, modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Favicon - Replace with your own -->
+    <link rel="icon" href="https://placehold.co/32x32/a78bfa/ffffff?text=JD" type="image/png">
+
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8; /* A very light blue-gray background */
+            color: #193B68; /* Dark navy blue for text */
+        }
+
+        /* Style for the animated underline on nav links */
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #14EBFF; /* Main brand blue for underline */
+            transition: width .3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Simple fade-in animation class */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/70 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo/Name -->
+            <a href="#" class="text-2xl font-bold text-blue-900 hover:text-blue-600 transition-colors">Keanu Lee Naidoo</a>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">About me</a>
+                <a href="#experience" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">Experience</a>
+                <a href="#education" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">Education</a>
+                <a href="#skills" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">Skills</a>
+                <a href="#languages" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">Languages</a>
+                <a href="#youtube" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">YouTube</a>
+                <a href="#contact" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 text-blue-800 hover:text-blue-600">About me</a>
+            <a href="#experience" class="block py-2 text-blue-800 hover:text-blue-600">Experience</a>
+            <a href="#education" class="block py-2 text-blue-800 hover:text-blue-600">Education</a>
+            <a href="#skills" class="block py-2 text-blue-800 hover:text-blue-600">Skills</a>
+            <a href="#languages" class="block py-2 text-blue-800 hover:text-blue-600">Languages</a>
+            <a href="#youtube" class="block py-2 text-blue-800 hover:text-blue-600">YouTube</a>
+            <a href="#contact" class="block py-2 text-blue-800 hover:text-blue-600">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pt-24 md:pt-32 space-y-10 md:space-y-14">
+
+        <!-- Hero Section -->
+<section id="hero" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+        <!-- Left Column: Text Content -->
+        <div class="text-center md:text-left">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-blue-900 leading-tight mb-4">
+                Keanu Lee Naidoo
+            </h1>
+            <p class="text-xl md:text-2xl text-blue-700 max-w-3xl mx-auto md:mx-0 mb-8">
+                A dedicated and problem-solving Computer Science graduate, currently developing my skills as a Graduate Trainee at Datacentrix.
+            </p>
+            <a href="#about" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 text-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/40 inline-block">
+                Learn more
+            </a>
+        </div>
+        <!-- Right Column: Image -->
+        <div class="hidden md:block">
+            <img src="assets\shared image (14).jpg" alt="A portrait of Keanu Lee Naidoo" class="rounded-full shadow-2xl w-full max-w-sm mx-auto">
+        </div>
+    </div>
+</section>
+
+       <!-- About Section -->
+<section id="about" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
+    <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold text-blue-900 mb-4">About Me</h2>
+        <p class="text-lg text-blue-700 mb-4">
+            I have graduated from the University of KwaZulu-Natal in BSc Computer Science and Information Technology. Currently, I am employed at Datacentrix as a Graduate Trainee. I am someone who loves problem solving and am dedicated to ensuring the highest quality of work that I can provide. I enjoy working in a team and taking the lead in any team environment. I hope to continue to strive forward and improve as a person in all walks of life.
+        </p>
+        <p class="text-lg text-blue-700 mb-6">
+            My goal is to build products that are not only visually appealing but also provide a seamless and intuitive user experience. Outside of my professional life, I'm a black belt in Karate and a monetized YouTuber. When I'm not coding, you can find me playing video games or watching/playing football.
+        </p>
+        <div class="mt-8">
+            <a href="assets/KEANU LEE NAIDOO CV 2025.pdf" target="_blank" class="bg-transparent border-2 border-blue-500 text-blue-500 font-bold py-3 px-8 rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/40 inline-block">
+                Download CV
+            </a>
+        </div>
+    </div>
+</section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
+            <h2 class="text-4xl font-bold text-blue-900 text-center mb-12">Experience</h2>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="bg-white/5 border border-white/10 rounded-lg p-6 shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-900">Graduate Trainee</h3>
+                    <p class="text-blue-700">Datacentrix • 2025 – Present</p>
+                    <p class="text-blue-600 mt-3">Hands-on exposure to enterprise systems, cross-functional teamwork, and professional development.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
+            <h2 class="text-4xl font-bold text-center mb-12 text-blue-900">Education</h2>
+            <div class="relative max-w-4xl mx-auto">
+                <!-- The vertical timeline line -->
+                <div class="absolute left-6 top-0 h-full w-0.5 bg-blue-200"></div>
+        
+                <!-- University of KwaZulu-Natal -->
+                <div class="relative mb-8 pl-14">
+                    <!-- Timeline Dot -->
+                    <div class="absolute left-6 top-2 w-4 h-4 bg-blue-500 rounded-full -translate-x-1/2 border-4 border-white"></div>
+                    <div class="flex items-start gap-6">
+                        <!-- UKZN Badge -->
+                        <div class="bg-white p-2 rounded-md border border-gray-200 shadow-sm flex-shrink-0">
+                            <img src="assets/UKZN%20logo.png" 
+                                 alt="University of KwaZulu-Natal Badge" 
+                                 class="h-16 w-16 object-contain"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/64x64/ffffff/193B68?text=UKZN';">
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">BSc Computer Science & Information Technology</h3>
+                            <p class="text-gray-500 font-medium">University of KwaZulu-Natal • 2021 – 2024</p>
+                            <p class="text-gray-600 mt-2">Core modules included Algorithms, Data Structures, Databases, Operating Systems, and Software Engineering.</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Crawford International -->
+                <div class="relative pl-14">
+                    <!-- Timeline Dot -->
+                    <div class="absolute left-6 top-2 w-4 h-4 bg-blue-500 rounded-full -translate-x-1/2 border-4 border-white"></div>
+                    <div class="flex items-start gap-6">
+                        <!-- Crawford Badge -->
+                        <div class="bg-white p-2 rounded-md border border-gray-200 shadow-sm flex-shrink-0">
+                            <img src="assets/chs_image_1_1_1_1-1920w.png" 
+                                 alt="Crawford International Badge" 
+                                 class="h-16 w-16 object-contain"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/64x64/ffffff/193B68?text=CI';">
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">High School Diploma</h3>
+                            <p class="text-gray-500 font-medium">Crawford International La Lucia • 2017 – 2021</p>
+                            <p class="text-gray-600 mt-2">Actively involved in first-team soccer, basketball, cricket, and hockey, which enhanced my teamwork and leadership skills.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Skills Section -->
+        <section id="skills" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
+            <h2 class="text-4xl font-bold text-blue-900 text-center mb-12">Skills</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white/5 border border-white/10 rounded-lg p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">Technical Skills</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Web Applications</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Software Development</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">.NET Framework & .NET Core</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Object-Oriented Programming</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">System Development</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Databases</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Design</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">HTML</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">CSS & Tailwind</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">JavaScript</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">React</span>
+                    </div>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-lg p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">Soft Skills</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Leadership</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Group Work</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Presentation Skills</span>
+                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Public Speaking</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programming Languages Section -->
+        <!-- Language Proficiencies Section -->
+        <section id="languages" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
+            <h2 class="text-4xl font-bold text-blue-900 text-center mb-12">Language Proficiencies</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- C# -->
+                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-lg">C#</span>
+                        <span class="font-bold text-blue-600 text-lg">90%</span>
+                    </div>
+                    <div class="w-full bg-blue-100 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+
+                <!-- SQL -->
+                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-lg">SQL</span>
+                        <span class="font-bold text-blue-600 text-lg">90%</span>
+                    </div>
+                    <div class="w-full bg-blue-100 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+
+                <!-- Java -->
+                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-lg">Java</span>
+                        <span class="font-bold text-blue-600 text-lg">80%</span>
+                    </div>
+                    <div class="w-full bg-blue-100 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+
+                <!-- Python -->
+                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-lg">Python</span>
+                        <span class="font-bold text-blue-600 text-lg">75%</span>
+                    </div>
+                    <div class="w-full bg-blue-100 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <!-- C++ -->
+                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-lg">C++</span>
+                        <span class="font-bold text-blue-600 text-lg">70%</span>
+                    </div>
+                    <div class="w-full bg-blue-100 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 70%"></div>
+                    </div>
+                </div>
+
+                <!-- JavaScript -->
+                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-lg">JavaScript</span>
+                        <span class="font-bold text-blue-600 text-lg">60%</span>
+                    </div>
+                    <div class="w-full bg-blue-100 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 60%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- YouTube Section -->
+    <section id="youtube" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
+        <h2 class="text-4xl font-bold text-blue-900 text-center mb-4">My YouTube Channel</h2>
+        <p class="text-xl text-blue-700 max-w-3xl mx-auto text-center mb-8">
+            I also run a monetized YouTube channel, KLN Studios, where I share content I'm passionate about. Check it out to see another side of my creative work!
+        </p>
+        <div class="text-center">
+            <a href="https://youtube.com/@klnstudios7865?si=CrWhLA9XCxyekrrF" target="_blank" rel="noopener noreferrer" class="bg-red-600 text-white font-bold py-3 px-6 rounded-full hover:bg-red-700 transition-transform transform hover:scale-105 text-lg inline-flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-red-500/40">
+                <!-- YouTube SVG Logo -->
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M19.802 5.802a2.5 2.5 0 00-1.768-1.768C16.538 3.5 12 3.5 12 3.5s-4.538 0-6.034.534a2.5 2.5 0 00-1.768 1.768C3.5 7.298 3.5 12 3.5 12s0 4.702.7 6.198a2.5 2.5 0 001.768 1.768C7.462 20.5 12 20.5 12 20.5s4.538 0 6.034-.534a2.5 2.5 0 001.768-1.768C20.5 16.702 20.5 12 20.5 12s0-4.702-.698-6.198zM9.5 15.5v-7l6 3.5-6 3.5z" clip-rule="evenodd" />
+                </svg>
+                <span>Visit KLN Studios</span>
+            </a>
+        </div>
+    </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 text-center fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
+            <h2 class="text-4xl font-bold text-blue-900 mb-4">Contact Me</h2>
+            <p class="text-xl text-blue-700 max-w-2xl mx-auto mb-8">
+                I'm currently open to new opportunities and collaborations. The best way to reach me is via email or LinkedIn.
+            </p>
+            
+            <!-- Contact Info -->
+            <div class="my-8 space-y-2 text-lg text-blue-700">
+                <p><strong>Email:</strong> KeanuLeeNaidoo@gmail.com</p>
+                <p><strong>Phone:</strong> +27 73 866 1775</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="mailto:KeanuLeeNaidoo@gmail.com" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition-transform transform hover:scale-105 text-lg w-full sm:w-auto transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/40">
+                    Email Me
+                </a>
+                <a href="https://www.linkedin.com/in/keanu-lee-naidoo-0a9871349/" target="_blank" rel="noopener noreferrer" class="bg-transparent border-2 border-sky-500 text-sky-500 font-bold py-3 px-8 rounded-full hover:bg-sky-500 hover:text-white transition-colors text-lg w-full sm:w-auto transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-500/40">
+                    Connect on LinkedIn
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-950 mt-20">
+        <div class="container mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="text-blue-200">&copy; 2025 Keanu Lee Naidoo. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <!-- GitHub Link -->
+                <a href="#" class="text-blue-200 hover:text-[#14EBFF] transition-colors" title="GitHub">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.286 2.865 7.92 6.671 9.243.486.09.664-.21.664-.468 0-.23-.009-.838-.014-1.645-2.782.605-3.369-1.343-3.369-1.343-.442-1.123-1.08-1.422-1.08-1.422-.883-.604.067-.592.067-.592.976.069 1.49 1.003 1.49 1.003.867 1.486 2.275 1.057 2.83.809.088-.628.34-1.057.618-1.299-2.16-.247-4.433-1.08-4.433-4.817 0-1.064.38-1.935 1.004-2.617-.1-.247-.436-1.237.096-2.58 0 0 .816-.262 2.675 1.002a9.38 9.38 0 012.44-.328c.813 0 1.63.11 2.44.328 1.86-1.264 2.672-1.002 2.672-1.002.533 1.343.196 2.333.097 2.58.625.682 1.003 1.553 1.003 2.617 0 3.748-2.277 4.566-4.443 4.809.35.302.662.9.662 1.815 0 1.31-.012 2.372-.012 2.693 0 .26.176.562.67.465A10.007 10.007 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                </a>
+                <!-- CV Link -->
+                <a href="assets/KEANU%20LEE%20NAIDOO%20CV%202025.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-200 hover:text-[#14EBFF] transition-colors" title="Download CV">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </a>
+                <!-- LinkedIn Link -->
+                <a href="https://www.linkedin.com/in/keanu-lee-naidoo-0a9871349/" target="_blank" rel="noopener noreferrer" class="text-blue-200 hover:text-[#14EBFF] transition-colors" title="LinkedIn">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.282 8.905H4.056v-8.59h2.563v8.59zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // JavaScript for Scroll-triggered Fade-in Animation
+        const sections = document.querySelectorAll('.fade-in-section');
+
+        const observerOptions = {
+            root: null, // relative to the viewport
+            rootMargin: '0px',
+            threshold: 0.1 // 10% of the item must be visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Optional: stop observing the element once it's visible
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Attach the observer to each section
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+
+</body>
+</html>

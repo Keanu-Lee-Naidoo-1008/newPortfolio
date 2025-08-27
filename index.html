@@ -14,15 +14,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <!-- Favicon - Replace with your own -->
-    <link rel="icon" href="https://placehold.co/32x32/a78bfa/ffffff?text=JD" type="image/png">
+    <link rel="icon" href="https://placehold.co/32x32/1479FF/ffffff?text=KN" type="image/png">
 
     <style>
         /* Custom styles to complement Tailwind */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F0F4F8; /* A very light blue-gray background */
-            color: #193B68; /* Dark navy blue for text */
+            background-color: #F0F4F8; /* Light Mode Background */
+            color: #193B68; /* Light Mode Text */
+            transition: background-color 0.5s, color 0.5s;
         }
+        .dark body {
+            background-color: #222831; /* NEW Dark Mode Background */
+            color: #EEEEEE; /* NEW Dark Mode Text */
+        }
+
+        /* Canvas for animated background */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Sit behind all content */
+        }
+        
+        /* NEW Dark mode gradient glow */
+        .dark #particle-canvas {
+            background: radial-gradient(ellipse at bottom, rgba(0, 173, 181, 0.15) 0%, rgba(34, 40, 49, 0) 70%);
+        }
+
+        /* Glassmorphism effect for sections */
+        .glass-section {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+        }
+        .dark .glass-section {
+            background-color: rgba(57, 62, 70, 0.6); /* NEW Panel color */
+        }
+
 
         /* Style for the animated underline on nav links */
         .nav-link::after {
@@ -30,7 +61,7 @@
             display: block;
             width: 0;
             height: 2px;
-            background: #14EBFF; /* Main brand blue for underline */
+            background: #00ADB5; 
             transition: width .3s;
         }
 
@@ -49,287 +80,312 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Keyframes for the striped loading animation */
+        @keyframes progress-bar-stripes {
+            from { background-position: 1rem 0; }
+            to { background-position: 0 0; }
+        }
+
+        /* Class for the animated progress bar */
+        .progress-bar-animated {
+            width: 0; /* Start at 0 width */
+            transition: width 1.5s ease-in-out;
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+            background-size: 1rem 1rem;
+            animation: progress-bar-stripes 1s linear infinite;
+        }
     </style>
+    <script>
+        // Tailwind config for dark mode
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
 </head>
 <body class="antialiased">
 
+    <!-- Animated Background -->
+    <canvas id="particle-canvas"></canvas>
+
     <!-- Header & Navigation -->
-    <header class="bg-white/70 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
+    <header class="bg-white/70 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-[#14EBFF] dark:bg-[#222831]/70 dark:border-[#00ADB5]">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <!-- Logo/Name -->
-            <a href="#" class="text-2xl font-bold text-blue-900 hover:text-blue-600 transition-colors">Keanu Lee Naidoo</a>
+            <a href="#" class="text-2xl font-bold text-blue-900 dark:text-white hover:text-blue-600 dark:hover:text-[#00ADB5] transition-colors">Keanu Lee Naidoo</a>
             
-            <!-- Navigation Links -->
-            <nav class="hidden md:flex space-x-8">
-                <a href="#about" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">About me</a>
-                <a href="#experience" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">Experience</a>
-                <a href="#education" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">Education</a>
-                <a href="#skills" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">Skills</a>
-                <a href="#languages" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">Languages</a>
-                <a href="#youtube" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">YouTube</a>
-                <a href="#contact" class="nav-link text-lg text-blue-800 hover:text-blue-600 transition-colors">Contact</a>
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link text-lg text-blue-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-[#00ADB5] transition-colors">About me</a>
+                <a href="#experience" class="nav-link text-lg text-blue-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-[#00ADB5] transition-colors">Experience</a>
+                <a href="#projects" class="nav-link text-lg text-blue-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-[#00ADB5] transition-colors">Projects</a>
+                <a href="#education" class="nav-link text-lg text-blue-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-[#00ADB5] transition-colors">Education</a>
+                <a href="#skills" class="nav-link text-lg text-blue-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-[#00ADB5] transition-colors">Skills</a>
+                <a href="#languages" class="nav-link text-lg text-blue-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-[#00ADB5] transition-colors">Languages</a>
+                <a href="#youtube" class="nav-link text-lg text-blue-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-[#00ADB5] transition-colors">YouTube</a>
+                <a href="#contact" class="nav-link text-lg text-blue-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-[#00ADB5] transition-colors">Contact</a>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="theme-toggle" class="ml-4 p-2 rounded-full text-blue-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                    <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
             </nav>
 
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+            <button id="mobile-menu-button" class="md:hidden text-blue-800 dark:text-gray-300 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </div>
         
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="#about" class="block py-2 text-blue-800 hover:text-blue-600">About me</a>
-            <a href="#experience" class="block py-2 text-blue-800 hover:text-blue-600">Experience</a>
-            <a href="#education" class="block py-2 text-blue-800 hover:text-blue-600">Education</a>
-            <a href="#skills" class="block py-2 text-blue-800 hover:text-blue-600">Skills</a>
-            <a href="#languages" class="block py-2 text-blue-800 hover:text-blue-600">Languages</a>
-            <a href="#youtube" class="block py-2 text-blue-800 hover:text-blue-600">YouTube</a>
-            <a href="#contact" class="block py-2 text-blue-800 hover:text-blue-600">Contact</a>
+            <a href="#about" class="block py-2 text-blue-800 dark:text-gray-300 hover:text-blue-600">About me</a>
+            <a href="#experience" class="block py-2 text-blue-800 dark:text-gray-300 hover:text-blue-600">Experience</a>
+            <a href="#projects" class="block py-2 text-blue-800 dark:text-gray-300 hover:text-blue-600">Projects</a>
+            <a href="#education" class="block py-2 text-blue-800 dark:text-gray-300 hover:text-blue-600">Education</a>
+            <a href="#skills" class="block py-2 text-blue-800 dark:text-gray-300 hover:text-blue-600">Skills</a>
+            <a href="#languages" class="block py-2 text-blue-800 dark:text-gray-300 hover:text-blue-600">Languages</a>
+            <a href="#youtube" class="block py-2 text-blue-800 dark:text-gray-300 hover:text-blue-600">YouTube</a>
+            <a href="#contact" class="block py-2 text-blue-800 dark:text-gray-300 hover:text-blue-600">Contact</a>
         </div>
     </header>
 
     <main class="container mx-auto px-6 pt-24 md:pt-32 space-y-10 md:space-y-14">
 
         <!-- Hero Section -->
-<section id="hero" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
-    <div class="grid md:grid-cols-2 gap-10 items-center">
-        <!-- Left Column: Text Content -->
-        <div class="text-center md:text-left">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-blue-900 leading-tight mb-4">
-                Keanu Lee Naidoo
-            </h1>
-            <p class="text-xl md:text-2xl text-blue-700 max-w-3xl mx-auto md:mx-0 mb-8">
-                A dedicated and problem-solving Computer Science graduate, currently developing my skills as a Graduate Trainee at Datacentrix.
-            </p>
-            <a href="#about" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 text-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/40 inline-block">
-                Learn more
-            </a>
-        </div>
-        <!-- Right Column: Image -->
-        <div class="hidden md:block">
-            <img src="assets\shared image (14).jpg" alt="A portrait of Keanu Lee Naidoo" class="rounded-full shadow-2xl w-full max-w-sm mx-auto">
-        </div>
-    </div>
-</section>
+        <section id="hero" class="glass-section rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF] dark:border-[#00ADB5]">
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-blue-900 dark:text-white leading-tight mb-4">
+                        Keanu&nbsp;Lee Naidoo
+                    </h1>
+                    <p class="text-xl md:text-2xl text-blue-700 dark:text-gray-300 max-w-3xl mx-auto md:mx-0 mb-8">
+                        A dedicated and problem-solving Computer Science graduate, currently developing my skills as a Graduate Trainee at Datacentrix.
+                    </p>
+                    <a href="#about" class="bg-blue-600 dark:bg-[#00ADB5] text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 dark:hover:bg-cyan-600 text-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/40 inline-block">
+                        Learn more
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <img src="assets/shared image (14).jpg" alt="A portrait of Keanu Lee Naidoo" class="rounded-full shadow-2xl w-full max-w-sm mx-auto">
+                </div>
+            </div>
+        </section>
 
-       <!-- About Section -->
-<section id="about" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
-    <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-4xl font-bold text-blue-900 mb-4">About Me</h2>
-        <p class="text-lg text-blue-700 mb-4">
-            I have graduated from the University of KwaZulu-Natal in BSc Computer Science and Information Technology. Currently, I am employed at Datacentrix as a Graduate Trainee. I am someone who loves problem solving and am dedicated to ensuring the highest quality of work that I can provide. I enjoy working in a team and taking the lead in any team environment. I hope to continue to strive forward and improve as a person in all walks of life.
-        </p>
-        <p class="text-lg text-blue-700 mb-6">
-            My goal is to build products that are not only visually appealing but also provide a seamless and intuitive user experience. Outside of my professional life, I'm a black belt in Karate and a monetized YouTuber. When I'm not coding, you can find me playing video games or watching/playing football.
-        </p>
-        <div class="mt-8">
-            <a href="assets/KEANU LEE NAIDOO CV 2025.pdf" target="_blank" class="bg-transparent border-2 border-blue-500 text-blue-500 font-bold py-3 px-8 rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/40 inline-block">
-                Download CV
-            </a>
-        </div>
-    </div>
-</section>
+        <!-- About Section -->
+        <section id="about" class="glass-section rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF] dark:border-[#00ADB5]">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold text-blue-900 dark:text-[#00ADB5] mb-4">About Me</h2>
+                <p class="text-lg text-blue-700 dark:text-gray-300 mb-4">
+                    I have graduated from the University of KwaZulu-Natal in BSc Computer Science and Information Technology. Currently, I am employed at Datacentrix as a Graduate Trainee. I am someone who loves problem solving and am dedicated to ensuring the highest quality of work that I can provide. I enjoy working in a team and taking the lead in any team environment. I hope to continue to strive forward and improve as a person in all walks of life.
+                </p>
+                <p class="text-lg text-blue-700 dark:text-gray-300 mb-6">
+                    My goal is to build products that are not only visually appealing but also provide a seamless and intuitive user experience. Outside of my professional life, I'm a black belt in Karate and a monetized YouTuber. When I'm not coding, you can find me playing video games or watching/playing football.
+                </p>
+                <!--
+                <div class="mt-8">
+                    <a href="assets/KEANU LEE NAIDOO CV 2025.pdf" target="_blank" class="bg-transparent border-2 border-blue-500 dark:border-[#00ADB5] text-blue-500 dark:text-[#00ADB5] font-bold py-3 px-8 rounded-full hover:bg-blue-500 dark:hover:bg-[#00ADB5] hover:text-white dark:hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/40 inline-block">
+                        Download CV
+                    </a>
+                </div>
+                -->
+            </div>
+        </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
-            <h2 class="text-4xl font-bold text-blue-900 text-center mb-12">Experience</h2>
-            <div class="max-w-4xl mx-auto space-y-8">
-                <div class="bg-white/5 border border-white/10 rounded-lg p-6 shadow-lg">
-                    <h3 class="text-2xl font-bold text-blue-900">Graduate Trainee</h3>
-                    <p class="text-blue-700">Datacentrix • 2025 – Present</p>
-                    <p class="text-blue-600 mt-3">Hands-on exposure to enterprise systems, cross-functional teamwork, and professional development.</p>
+        <section id="experience" class="glass-section rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF] dark:border-[#00ADB5]">
+            <h2 class="text-4xl font-bold text-blue-900 dark:text-[#00ADB5] text-center mb-12">Experience</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-blue-50/50 dark:bg-[#393E46] dark:border-gray-700 border border-blue-100 rounded-xl p-6">
+                    <h3 class="text-2xl font-bold text-blue-900 dark:text-white">Graduate Trainee</h3>
+                    <p class="text-blue-700 dark:text-gray-400">Datacentrix • 2025 – Present</p>
+                    <p class="text-blue-600 dark:text-gray-300 mt-3">Hands-on exposure to enterprise systems, cross-functional teamwork, and professional development.</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="glass-section rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF] dark:border-[#00ADB5]">
+            <h2 class="text-4xl font-bold text-blue-900 dark:text-[#00ADB5] text-center mb-12">Projects</h2>
+            <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                
+                <div class="bg-blue-50/50 dark:bg-[#393E46] dark:border-gray-700 border border-blue-100 rounded-xl p-6 flex flex-col">
+                    <h3 class="text-2xl font-bold text-blue-900 dark:text-white mb-2">Leave Management System</h3>
+                    <p class="text-blue-700 dark:text-gray-300 mb-4 flex-grow">A comprehensive system for River Palace Bets, developed as a final year university project. It includes both a computer and web application to manage employee leave and an extra work roster, with data managed via a Microsoft SQL Server backend.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto pt-4">
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">C# & .NET</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">Web Application</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">MS SQL Server</span>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50/50 dark:bg-[#393E46] dark:border-gray-700 border border-blue-100 rounded-xl p-6 flex flex-col">
+                    <h3 class="text-2xl font-bold text-blue-900 dark:text-white mb-2">Personal Portfolio Website</h3>
+                    <p class="text-blue-700 dark:text-gray-300 mb-4 flex-grow">The very website you are on now. A fully responsive, single-page portfolio built from scratch to showcase my skills and experience, featuring a light/dark mode toggle and modern UI design.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto pt-4">
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">HTML</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">CSS & Tailwind</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">JavaScript</span>
+                    </div>
+                </div>
+
             </div>
         </section>
 
         <!-- Education Section -->
-        <section id="education" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
-            <h2 class="text-4xl font-bold text-center mb-12 text-blue-900">Education</h2>
+        <section id="education" class="glass-section rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF] dark:border-[#00ADB5]">
+            <h2 class="text-4xl font-bold text-center mb-12 text-blue-900 dark:text-[#00ADB5]">Education</h2>
             <div class="relative max-w-4xl mx-auto">
-                <!-- The vertical timeline line -->
-                <div class="absolute left-6 top-0 h-full w-0.5 bg-blue-200"></div>
-        
-                <!-- University of KwaZulu-Natal -->
+                <div class="absolute left-6 top-0 h-full w-0.5 bg-blue-200 dark:bg-gray-700"></div>
                 <div class="relative mb-8 pl-14">
-                    <!-- Timeline Dot -->
-                    <div class="absolute left-6 top-2 w-4 h-4 bg-blue-500 rounded-full -translate-x-1/2 border-4 border-white"></div>
+                    <div class="absolute left-6 top-2 w-4 h-4 bg-blue-500 dark:bg-[#00ADB5] rounded-full -translate-x-1/2 border-4 border-white dark:border-[#393E46]"></div>
                     <div class="flex items-start gap-6">
-                        <!-- UKZN Badge -->
                         <div class="bg-white p-2 rounded-md border border-gray-200 shadow-sm flex-shrink-0">
-                            <img src="assets/UKZN%20logo.png" 
-                                 alt="University of KwaZulu-Natal Badge" 
-                                 class="h-16 w-16 object-contain"
-                                 onerror="this.onerror=null;this.src='https://placehold.co/64x64/ffffff/193B68?text=UKZN';">
+                            <img src="assets/UKZN%20logo.png" alt="University of KwaZulu-Natal Badge" class="h-16 w-16 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/64x64/ffffff/193B68?text=UKZN';">
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold">BSc Computer Science & Information Technology</h3>
-                            <p class="text-gray-500 font-medium">University of KwaZulu-Natal • 2021 – 2024</p>
-                            <p class="text-gray-600 mt-2">Core modules included Algorithms, Data Structures, Databases, Operating Systems, and Software Engineering.</p>
+                            <h3 class="text-2xl font-bold dark:text-white">BSc Computer Science & Information Technology</h3>
+                            <p class="text-gray-500 dark:text-gray-400 font-medium">University of KwaZulu-Natal • 2021 – 2024</p>
+                            <p class="text-gray-600 dark:text-gray-300 mt-2">Core modules included Algorithms, Data Structures, Databases, Operating Systems, and Software Engineering.</p>
                         </div>
                     </div>
                 </div>
-        
-                <!-- Crawford International -->
                 <div class="relative pl-14">
-                    <!-- Timeline Dot -->
-                    <div class="absolute left-6 top-2 w-4 h-4 bg-blue-500 rounded-full -translate-x-1/2 border-4 border-white"></div>
+                    <div class="absolute left-6 top-2 w-4 h-4 bg-blue-500 dark:bg-[#00ADB5] rounded-full -translate-x-1/2 border-4 border-white dark:border-[#393E46]"></div>
                     <div class="flex items-start gap-6">
-                        <!-- Crawford Badge -->
                         <div class="bg-white p-2 rounded-md border border-gray-200 shadow-sm flex-shrink-0">
-                            <img src="assets/chs_image_1_1_1_1-1920w.png" 
-                                 alt="Crawford International Badge" 
-                                 class="h-16 w-16 object-contain"
-                                 onerror="this.onerror=null;this.src='https://placehold.co/64x64/ffffff/193B68?text=CI';">
+                            <img src="assets/chs_image_1_1_1_1-1920w.png" alt="Crawford International Badge" class="h-16 w-16 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/64x64/ffffff/193B68?text=CI';">
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold">High School Diploma</h3>
-                            <p class="text-gray-500 font-medium">Crawford International La Lucia • 2017 – 2021</p>
-                            <p class="text-gray-600 mt-2">Actively involved in first-team soccer, basketball, cricket, and hockey, which enhanced my teamwork and leadership skills.</p>
+                            <h3 class="text-2xl font-bold dark:text-white">High School Diploma</h3>
+                            <p class="text-gray-500 dark:text-gray-400 font-medium">Crawford International La Lucia • 2017 – 2021</p>
+                            <p class="text-gray-600 dark:text-gray-300 mt-2">Actively involved in first-team soccer, basketball, cricket, and hockey, which enhanced my teamwork and leadership skills.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
         <!-- Skills Section -->
-        <section id="skills" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
-            <h2 class="text-4xl font-bold text-blue-900 text-center mb-12">Skills</h2>
+        <section id="skills" class="glass-section rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF] dark:border-[#00ADB5]">
+            <h2 class="text-4xl font-bold text-blue-900 dark:text-[#00ADB5] text-center mb-12">Skills</h2>
             <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="bg-white/5 border border-white/10 rounded-lg p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-blue-900 mb-4">Technical Skills</h3>
+                <div class="bg-blue-50/50 dark:bg-[#393E46] dark:border-gray-700 border border-blue-100 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-blue-900 dark:text-white mb-4">Technical Skills</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Web Applications</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Software Development</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">.NET Framework & .NET Core</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Object-Oriented Programming</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">System Development</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Databases</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Design</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">HTML</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">CSS & Tailwind</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">JavaScript</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">React</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">Web Applications</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">Software Development</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">.NET Framework & .NET Core</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">Object-Oriented Programming</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">System Development</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">Databases</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">HTML, CSS & Tailwind</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">JavaScript</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">Java</span>
                     </div>
                 </div>
-                <div class="bg-white/5 border border-white/10 rounded-lg p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-blue-900 mb-4">Soft Skills</h3>
+                <div class="bg-blue-50/50 dark:bg-[#393E46] dark:border-gray-700 border border-blue-100 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-blue-900 dark:text-white mb-4">Soft Skills</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Leadership</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Group Work</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Presentation Skills</span>
-                        <span class="bg-cyan-50 text-[#14EBFF] font-semibold px-3 py-1 rounded-full border border-cyan-200">Public Speaking</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">Leadership</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">Group Work</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">Presentation Skills</span>
+                        <span class="bg-cyan-100 dark:bg-gray-700 text-[#00ADB5] font-semibold px-3 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">Public Speaking</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Programming Languages Section -->
         <!-- Language Proficiencies Section -->
-        <section id="languages" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
-            <h2 class="text-4xl font-bold text-blue-900 text-center mb-12">Language Proficiencies</h2>
+        <section id="languages" class="glass-section rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF] dark:border-[#00ADB5]">
+            <h2 class="text-4xl font-bold text-blue-900 dark:text-[#00ADB5] text-center mb-12">Language Proficiencies</h2>
             <div class="grid md:grid-cols-2 gap-8">
-
-                <!-- C# -->
-                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                <div class="bg-blue-50/50 dark:bg-[#393E46] dark:border-gray-700 border border-blue-100 rounded-xl p-6">
                     <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-lg">C#</span>
-                        <span class="font-bold text-blue-600 text-lg">90%</span>
+                        <span class="font-bold text-lg dark:text-white">C#</span>
+                        <span class="font-bold text-blue-600 dark:text-[#00ADB5] text-lg">90%</span>
                     </div>
-                    <div class="w-full bg-blue-100 rounded-full h-2.5">
-                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 90%"></div>
+                    <div class="w-full bg-blue-100 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar-animated bg-blue-500 dark:bg-[#00ADB5] h-2.5 rounded-full" data-width="90%"></div>
                     </div>
                 </div>
-
-                <!-- SQL -->
-                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                <div class="bg-blue-50/50 dark:bg-[#393E46] dark:border-gray-700 border border-blue-100 rounded-xl p-6">
                     <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-lg">SQL</span>
-                        <span class="font-bold text-blue-600 text-lg">90%</span>
+                        <span class="font-bold text-lg dark:text-white">SQL</span>
+                        <span class="font-bold text-blue-600 dark:text-[#00ADB5] text-lg">90%</span>
                     </div>
-                    <div class="w-full bg-blue-100 rounded-full h-2.5">
-                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 90%"></div>
+                    <div class="w-full bg-blue-100 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar-animated bg-blue-500 dark:bg-[#00ADB5] h-2.5 rounded-full" data-width="90%"></div>
                     </div>
                 </div>
-
-                <!-- Java -->
-                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                <div class="bg-blue-50/50 dark:bg-[#393E46] dark:border-gray-700 border border-blue-100 rounded-xl p-6">
                     <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-lg">Java</span>
-                        <span class="font-bold text-blue-600 text-lg">80%</span>
+                        <span class="font-bold text-lg dark:text-white">Java</span>
+                        <span class="font-bold text-blue-600 dark:text-[#00ADB5] text-lg">80%</span>
                     </div>
-                    <div class="w-full bg-blue-100 rounded-full h-2.5">
-                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
+                    <div class="w-full bg-blue-100 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar-animated bg-blue-500 dark:bg-[#00ADB5] h-2.5 rounded-full" data-width="80%"></div>
                     </div>
                 </div>
-
-                <!-- Python -->
-                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                <div class="bg-blue-50/50 dark:bg-[#393E46] dark:border-gray-700 border border-blue-100 rounded-xl p-6">
                     <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-lg">Python</span>
-                        <span class="font-bold text-blue-600 text-lg">75%</span>
+                        <span class="font-bold text-lg dark:text-white">Python</span>
+                        <span class="font-bold text-blue-600 dark:text-[#00ADB5] text-lg">75%</span>
                     </div>
-                    <div class="w-full bg-blue-100 rounded-full h-2.5">
-                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 75%"></div>
+                    <div class="w-full bg-blue-100 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar-animated bg-blue-500 dark:bg-[#00ADB5] h-2.5 rounded-full" data-width="75%"></div>
                     </div>
                 </div>
-
-                <!-- C++ -->
-                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                <div class="bg-blue-50/50 dark:bg-[#393E46] dark:border-gray-700 border border-blue-100 rounded-xl p-6">
                     <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-lg">C++</span>
-                        <span class="font-bold text-blue-600 text-lg">70%</span>
+                        <span class="font-bold text-lg dark:text-white">C++</span>
+                        <span class="font-bold text-blue-600 dark:text-[#00ADB5] text-lg">70%</span>
                     </div>
-                    <div class="w-full bg-blue-100 rounded-full h-2.5">
-                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 70%"></div>
+                    <div class="w-full bg-blue-100 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar-animated bg-blue-500 dark:bg-[#00ADB5] h-2.5 rounded-full" data-width="70%"></div>
                     </div>
                 </div>
-
-                <!-- JavaScript -->
-                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6">
+                <div class="bg-blue-50/50 dark:bg-[#393E46] dark:border-gray-700 border border-blue-100 rounded-xl p-6">
                     <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-lg">JavaScript</span>
-                        <span class="font-bold text-blue-600 text-lg">60%</span>
+                        <span class="font-bold text-lg dark:text-white">JavaScript</span>
+                        <span class="font-bold text-blue-600 dark:text-[#00ADB5] text-lg">60%</span>
                     </div>
-                    <div class="w-full bg-blue-100 rounded-full h-2.5">
-                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 60%"></div>
+                    <div class="w-full bg-blue-100 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar-animated bg-blue-500 dark:bg-[#00ADB5] h-2.5 rounded-full" data-width="60%"></div>
                     </div>
                 </div>
-
             </div>
         </section>
 
         <!-- YouTube Section -->
-    <section id="youtube" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
-        <h2 class="text-4xl font-bold text-blue-900 text-center mb-4">My YouTube Channel</h2>
-        <p class="text-xl text-blue-700 max-w-3xl mx-auto text-center mb-8">
-            I also run a monetized YouTube channel, KLN Studios, where I share content I'm passionate about. Check it out to see another side of my creative work!
-        </p>
-        <div class="text-center">
-            <a href="https://youtube.com/@klnstudios7865?si=CrWhLA9XCxyekrrF" target="_blank" rel="noopener noreferrer" class="bg-red-600 text-white font-bold py-3 px-6 rounded-full hover:bg-red-700 transition-transform transform hover:scale-105 text-lg inline-flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-red-500/40">
-                <!-- YouTube SVG Logo -->
-                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M19.802 5.802a2.5 2.5 0 00-1.768-1.768C16.538 3.5 12 3.5 12 3.5s-4.538 0-6.034.534a2.5 2.5 0 00-1.768 1.768C3.5 7.298 3.5 12 3.5 12s0 4.702.7 6.198a2.5 2.5 0 001.768 1.768C7.462 20.5 12 20.5 12 20.5s4.538 0 6.034-.534a2.5 2.5 0 001.768-1.768C20.5 16.702 20.5 12 20.5 12s0-4.702-.698-6.198zM9.5 15.5v-7l6 3.5-6 3.5z" clip-rule="evenodd" />
-                </svg>
-                <span>Visit KLN Studios</span>
-            </a>
-        </div>
-    </section>
+        <section id="youtube" class="glass-section rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF] dark:border-[#00ADB5]">
+            <h2 class="text-4xl font-bold text-blue-900 dark:text-[#00ADB5] text-center mb-4">My YouTube Channel</h2>
+            <p class="text-xl text-blue-700 dark:text-gray-300 max-w-3xl mx-auto text-center mb-8">
+                I also run a monetized YouTube channel, KLN Studios, where I share content I'm passionate about. Check it out to see another side of my creative work!
+            </p>
+            <div class="text-center">
+                <a href="https://youtube.com/@klnstudios7865?si=CrWhLA9XCxyekrrF" target="_blank" rel="noopener noreferrer" class="bg-red-600 text-white font-bold py-3 px-6 rounded-full hover:bg-red-700 text-lg inline-flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-red-500/40">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M19.802 5.802a2.5 2.5 0 00-1.768-1.768C16.538 3.5 12 3.5 12 3.5s-4.538 0-6.034.534a2.5 2.5 0 00-1.768 1.768C3.5 7.298 3.5 12 3.5 12s0 4.702.7 6.198a2.5 2.5 0 001.768 1.768C7.462 20.5 12 20.5 12 20.5s4.538 0 6.034-.534a2.5 2.5 0 001.768-1.768C20.5 16.702 20.5 12 20.5 12s0-4.702-.698-6.198zM9.5 15.5v-7l6 3.5-6 3.5z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Visit KLN Studios</span>
+                </a>
+            </div>
+        </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 text-center fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF]">
-            <h2 class="text-4xl font-bold text-blue-900 mb-4">Contact Me</h2>
-            <p class="text-xl text-blue-700 max-w-2xl mx-auto mb-8">
+        <section id="contact" class="glass-section rounded-2xl shadow-lg shadow-blue-500/10 p-8 md:p-12 text-center fade-in-section transition-all duration-300 hover:-translate-y-2 hover:shadow-blue-500/20 border border-[#14EBFF] dark:border-[#00ADB5]">
+            <h2 class="text-4xl font-bold text-blue-900 dark:text-[#00ADB5] mb-4">Get In Touch</h2>
+            <p class="text-xl text-blue-700 dark:text-gray-300 max-w-2xl mx-auto mb-8">
                 I'm currently open to new opportunities and collaborations. The best way to reach me is via email or LinkedIn.
             </p>
-            
-            <!-- Contact Info -->
-            <div class="my-8 space-y-2 text-lg text-blue-700">
+            <div class="my-8 space-y-2 text-lg text-blue-700 dark:text-gray-300">
                 <p><strong>Email:</strong> KeanuLeeNaidoo@gmail.com</p>
                 <p><strong>Phone:</strong> +27 73 866 1775</p>
             </div>
-
-            <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="mailto:KeanuLeeNaidoo@gmail.com" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition-transform transform hover:scale-105 text-lg w-full sm:w-auto transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/40">
+                <a href="mailto:KeanuLeeNaidoo@gmail.com" class="bg-blue-600 dark:bg-[#00ADB5] text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 dark:hover:bg-cyan-600 text-lg w-full sm:w-auto transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/40">
                     Email Me
                 </a>
                 <a href="https://www.linkedin.com/in/keanu-lee-naidoo-0a9871349/" target="_blank" rel="noopener noreferrer" class="bg-transparent border-2 border-sky-500 text-sky-500 font-bold py-3 px-8 rounded-full hover:bg-sky-500 hover:text-white transition-colors text-lg w-full sm:w-auto transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-500/40">
@@ -341,20 +397,14 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-blue-950 mt-20">
+    <footer class="bg-[#222831] mt-20">
         <div class="container mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-            <p class="text-blue-200">&copy; 2025 Keanu Lee Naidoo. All rights reserved.</p>
+            <p class="text-gray-400">&copy; 2025 Keanu Lee Naidoo. All rights reserved.</p>
             <div class="flex space-x-6 mt-4 md:mt-0">
-                <!-- GitHub Link -->
-                <a href="#" class="text-blue-200 hover:text-[#14EBFF] transition-colors" title="GitHub">
+                <a href="#" class="text-gray-400 hover:text-[#00ADB5] transition-colors" title="GitHub">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.286 2.865 7.92 6.671 9.243.486.09.664-.21.664-.468 0-.23-.009-.838-.014-1.645-2.782.605-3.369-1.343-3.369-1.343-.442-1.123-1.08-1.422-1.08-1.422-.883-.604.067-.592.067-.592.976.069 1.49 1.003 1.49 1.003.867 1.486 2.275 1.057 2.83.809.088-.628.34-1.057.618-1.299-2.16-.247-4.433-1.08-4.433-4.817 0-1.064.38-1.935 1.004-2.617-.1-.247-.436-1.237.096-2.58 0 0 .816-.262 2.675 1.002a9.38 9.38 0 012.44-.328c.813 0 1.63.11 2.44.328 1.86-1.264 2.672-1.002 2.672-1.002.533 1.343.196 2.333.097 2.58.625.682 1.003 1.553 1.003 2.617 0 3.748-2.277 4.566-4.443 4.809.35.302.662.9.662 1.815 0 1.31-.012 2.372-.012 2.693 0 .26.176.562.67.465A10.007 10.007 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
                 </a>
-                <!-- CV Link -->
-                <a href="assets/KEANU%20LEE%20NAIDOO%20CV%202025.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-200 hover:text-[#14EBFF] transition-colors" title="Download CV">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                </a>
-                <!-- LinkedIn Link -->
-                <a href="https://www.linkedin.com/in/keanu-lee-naidoo-0a9871349/" target="_blank" rel="noopener noreferrer" class="text-blue-200 hover:text-[#14EBFF] transition-colors" title="LinkedIn">
+                <a href="https://www.linkedin.com/in/keanu-lee-naidoo-0a9871349/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-[#00ADB5] transition-colors" title="LinkedIn">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.282 8.905H4.056v-8.59h2.563v8.59zM17.638 2H6.362A4.362 4.362 0 002 6.362v11.276A4.362 4.362 0 006.362 22h11.276A4.362 4.362 0 0022 17.638V6.362A4.362 4.362 0 0017.638 2z" clip-rule="evenodd" /></svg>
                 </a>
             </div>
@@ -362,39 +412,210 @@
     </footer>
 
     <script>
-        // JavaScript for Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // JavaScript for Scroll-triggered Fade-in Animation
+        // General fade-in animation logic
         const sections = document.querySelectorAll('.fade-in-section');
-
-        const observerOptions = {
-            root: null, // relative to the viewport
-            rootMargin: '0px',
-            threshold: 0.1 // 10% of the item must be visible
-        };
-
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    // Optional: stop observing the element once it's visible
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
+        sections.forEach(section => { observer.observe(section); });
 
-        // Attach the observer to each section
-        sections.forEach(section => {
-            observer.observe(section);
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        
+        // Theme toggle logic
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
         });
+
+        // Progress bar animation logic
+        const languagesSection = document.getElementById('languages');
+        const progressBars = document.querySelectorAll('.progress-bar-animated');
+        
+        const progressObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    progressBars.forEach(bar => {
+                        const targetWidth = bar.getAttribute('data-width');
+                        bar.style.width = targetWidth;
+                    });
+                    observer.unobserve(entry.target); // Animate only once
+                }
+            });
+        }, { threshold: 0.5 }); // Trigger when 50% of the section is visible
+
+        progressObserver.observe(languagesSection);
+
+        // Particle Animation Logic
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let waves = [];
+        let animationFrameId;
+
+        // Theme-based colors
+        let colors = {
+            light: { particle: '#1479FF', line: 'rgba(20, 121, 255, 0.2)', wave: 'rgba(20, 121, 255, 0.1)' },
+            dark: { particle: '#00ADB5', line: 'rgba(0, 173, 181, 0.2)', wave: 'rgba(0, 173, 181, 0.1)' }
+        };
+        let currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+            initWaves();
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.size > 0.2) this.size -= 0.01;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = colors[currentTheme].particle;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        class Wave {
+            constructor(amplitude, frequency, speed, yOffset) {
+                this.amplitude = amplitude;
+                this.frequency = frequency;
+                this.speed = speed;
+                this.yOffset = yOffset;
+                this.phase = Math.random() * Math.PI * 2;
+            }
+            update() {
+                this.phase += this.speed;
+            }
+            draw() {
+                ctx.strokeStyle = colors[currentTheme].wave;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(0, this.yOffset);
+                for (let x = 0; x < canvas.width; x++) {
+                    const y = Math.sin(x * this.frequency + this.phase) * this.amplitude + this.yOffset;
+                    ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            let numberOfParticles = (canvas.width * canvas.height) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function initWaves() {
+            waves = [];
+            waves.push(new Wave(50, 0.005, 0.01, canvas.height * 0.2));
+            waves.push(new Wave(30, 0.008, -0.015, canvas.height * 0.5));
+            waves.push(new Wave(40, 0.006, 0.02, canvas.height * 0.8));
+        }
+
+        function handleParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = colors[currentTheme].line;
+                        ctx.lineWidth = 0.2;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function handleWaves() {
+            waves.forEach(wave => {
+                wave.update();
+                wave.draw();
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            handleWaves();
+            handleParticles();
+            animationFrameId = requestAnimationFrame(animate);
+        }
+
+        // Start animation
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animate();
+
+        // Update theme on toggle
+        const themeObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === "class") {
+                    currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                }
+            });
+        });
+        themeObserver.observe(document.documentElement, { attributes: true });
 
     </script>
 
 </body>
 </html>
+
